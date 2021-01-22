@@ -7,4 +7,23 @@ describe 'loading lists' do
 
       expect(order_service.get_orders_list).to eq orders.to_json
     end
-  end
+end
+
+describe 'order by user' do
+    it 'should return a list of orders by user' do
+      orders = [
+        { "user": "coach", "drink": "long black", "size": "medium" },
+        { "user": "ellis", "drink": "long black", "size": "small" },
+        { "user": "rochelle", "drink": "flat white", "size": "large" },
+        { "user": "coach", "drink": "flat white", "size": "large" },
+        { "user": "zoey", "drink": "long black", "size": "medium" },
+        { "user": "zoey", "drink": "short espresso", "size": "small" }
+      ]
+    
+      user_order = [[{"user"=>"coach", "drink"=>"long black", "size"=>"medium"}, {"user"=>"coach", "drink"=>"flat white", "size"=>"large"}], [{"user"=>"ellis", "drink"=>"long black", "size"=>"small"}], [{"user"=>"rochelle", "drink"=>"flat white", "size"=>"large"}], [{"user"=>"zoey", "drink"=>"long black", "size"=>"medium"}, {"user"=>"zoey", "drink"=>"short espresso", "size"=>"small"}]]
+      order_service = OrderService.new
+
+      expect(order_service.get_user_orders(orders.to_json)).to eq user_order
+ 
+    end
+end
