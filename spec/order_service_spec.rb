@@ -9,7 +9,7 @@ describe 'loading lists' do
     end
 end
 
-describe 'order by user' do
+describe 'order service' do
     it 'should return a list of orders by user' do
       orders = [
         { "user": "coach", "drink": "long black", "size": "medium" },
@@ -20,10 +20,61 @@ describe 'order by user' do
         { "user": "zoey", "drink": "short espresso", "size": "small" }
       ]
     
-      user_order = [[{"user"=>"coach", "drink"=>"long black", "size"=>"medium"}, {"user"=>"coach", "drink"=>"flat white", "size"=>"large"}], [{"user"=>"ellis", "drink"=>"long black", "size"=>"small"}], [{"user"=>"rochelle", "drink"=>"flat white", "size"=>"large"}], [{"user"=>"zoey", "drink"=>"long black", "size"=>"medium"}, {"user"=>"zoey", "drink"=>"short espresso", "size"=>"small"}]]
+      user_order = [
+        [{"user"=>"coach", "drink"=>"long black", "size"=>"medium"}, {"user"=>"coach", "drink"=>"flat white", "size"=>"large"}], 
+        [{"user"=>"ellis", "drink"=>"long black", "size"=>"small"}], 
+        [{"user"=>"rochelle", "drink"=>"flat white", "size"=>"large"}], 
+        [{"user"=>"zoey", "drink"=>"long black", "size"=>"medium"}, {"user"=>"zoey", "drink"=>"short espresso", "size"=>"small"}]
+      ]
+      
       order_service = OrderService.new
 
       expect(order_service.get_user_orders(orders.to_json)).to eq user_order
  
+    end
+
+    it 'should calcute total order by user' do
+      prices = [
+        { "drink_name": "short espresso", "prices": { "small": 3.03 } },
+        { "drink_name": "latte", "prices": { "small": 3.50, "medium": 4.00, "large": 4.50 } },
+        { "drink_name": "flat white", "prices": { "small": 3.50, "medium": 4.00, "large": 4.50 } },
+        { "drink_name": "long black", "prices": { "small": 3.25, "medium": 3.50 } },
+        { "drink_name": "mocha", "prices": { "small": 4.00, "medium": 4.50, "large": 5.00 } },
+        { "drink_name": "supermochacrapucaramelcream", "prices": { "large": 5.00, "huge": 5.50, "mega": 6.00, "ultra": 7.00 } }
+      ]
+
+      user_order = [
+        [{"user"=>"coach", "drink"=>"long black", "size"=>"medium"}, {"user"=>"coach", "drink"=>"flat white", "size"=>"large"}], 
+        [{"user"=>"ellis", "drink"=>"long black", "size"=>"small"}], 
+        [{"user"=>"rochelle", "drink"=>"flat white", "size"=>"large"}], 
+        [{"user"=>"zoey", "drink"=>"long black", "size"=>"medium"}, {"user"=>"zoey", "drink"=>"short espresso", "size"=>"small"}]
+      ]
+
+      total_order = [
+        { "user": "coach",    "order_total": 8.00 },
+        { "user": "ellis",    "order_total": 3.25 },
+        { "user": "rochelle", "order_total": 4.50 },
+        { "user": "zoey",     "order_total": 6.53 }
+      ]
+
+      order_service = OrderService.new
+      expect(order_service.get_total_orders(user_order, prices.to_json)).to eq total_order.to_json
+
+    end
+
+    it 'should calculate drinks prices' do
+      prices = [
+        { "drink_name": "short espresso", "prices": { "small": 3.03 } },
+        { "drink_name": "latte", "prices": { "small": 3.50, "medium": 4.00, "large": 4.50 } },
+        { "drink_name": "flat white", "prices": { "small": 3.50, "medium": 4.00, "large": 4.50 } },
+        { "drink_name": "long black", "prices": { "small": 3.25, "medium": 3.50 } },
+        { "drink_name": "mocha", "prices": { "small": 4.00, "medium": 4.50, "large": 5.00 } },
+        { "drink_name": "supermochacrapucaramelcream", "prices": { "large": 5.00, "huge": 5.50, "mega": 6.00, "ultra": 7.00 } }
+      ]
+      
+      order_service = OrderService.new
+
+      expect(order_service.calculate_user_drink_price('latte', 'medium', prices.to_json)).to eq 4.00
+
     end
 end
