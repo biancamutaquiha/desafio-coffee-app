@@ -1,8 +1,8 @@
-require 'load_list_helper'
+require 'list_helper'
 
 class PriceService
     def get_prices_list
-       LoadList.load('prices')
+       ListHelper.load('prices')
     end
 
 end

@@ -1,21 +1,16 @@
-require 'load_list_helper'
+require 'list_helper'
 
 class OrderService
     def get_orders_list
-       LoadList.load('orders')
+       ListHelper.load('orders')
     end
 
-    def get_user_orders(orders)
-        user_name_list = []
-        for order in JSON.parse(orders) do
-            if !user_name_list.include?(order['user'])
-              user_name_list.push(order['user'])
-            end
-        end
+    def get_user_orders(orders_list)
+        user_name_list = ListHelper.get_users_total_orders(orders_list)
         
         user_order_list = []
         user_name_list.each do |user_name|
-            user_order = JSON.parse(orders).select {|order| order['user'] == user_name}
+            user_order = JSON.parse(orders_list).select {|order| order['user'] == user_name}
             user_order_list.push(user_order)
         end
 
@@ -23,20 +18,19 @@ class OrderService
     end
 
     def get_total_orders(user_order_list, price_list)
-        #total_order = 0
         total_order_list = []
-        hash_total_order = {}
+        total_order_hash = {}
     
         user_order_list.each do |user_order|
             total_order = 0
             
-            user_order.each do |user|        
-                hash_total_order['user'] = user['user']
+            user_order.each do |user|
+                total_order_hash['user'] = user['user']
                 total_order += calculate_user_drink_price(user['drink'], user['size'], price_list)
             end
 
-            hash_total_order['order_total'] = total_order.round(2)
-            total_order_list.push(JSON.parse(hash_total_order.to_json))
+            total_order_hash['order_total'] = total_order.round(2)
+            total_order_list.push(JSON.parse(total_order_hash.to_json))
         end
         
         total_order_list.to_json

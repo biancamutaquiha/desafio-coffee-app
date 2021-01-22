@@ -1,8 +1,44 @@
-require 'load_list_helper'
+require 'list_helper'
 
 class PaymentService
     def get_payments_list
-       LoadList.load('payments')
+       ListHelper.load('payments')
     end
 
+    def get_user_payment(orders_list, payment_list)
+        user_list = ListHelper.get_users_total_orders(orders_list)
+
+        payment_user_list = []
+        user_list.each do |user|    
+            payment_user = JSON.parse(payment_list).select {|payment| payment['user'] == user}
+            if payment_user.empty?
+                payment_user[0] = {'user' => user, 'amount' => 0.0}
+            end
+            payment_user_list.push(payment_user)
+        end
+
+        return payment_user_list
+    end
+
+    def calculate_user_payment(orders_list, payment_list)
+        payment_user_list = get_user_payment(orders_list, payment_list)
+
+        payment_total_list = []
+        payment_total_hash = {}
+        
+        payment_user_list.each do |payment_user|
+            payment_total = 0
+            payment_user.each {|payment| 
+                payment_total_hash['user'] = payment['user']
+                payment_total += payment['amount']
+                
+            }
+            payment_total_hash['payment_total'] = payment_total
+            payment_total_list.push(JSON.parse(payment_total_hash.to_json))
+        end
+        payment_total_list.to_json
+    end
+
+    def calculate_user_balance()
+    end
 end
