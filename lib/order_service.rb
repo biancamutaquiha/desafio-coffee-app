@@ -6,12 +6,10 @@ class OrderService
     end
 
     def get_user_orders(orders_list)
-        user_name_list = ListHelper.get_users_total_orders(orders_list)
+        user_name_list = JSON.parse(orders_list).map { |order| order['user']}.uniq
         
-        user_order_list = []
-        user_name_list.each do |user_name|
+        user_order_list = user_name_list.map do |user_name|
             user_order = JSON.parse(orders_list).select {|order| order['user'] == user_name}
-            user_order_list.push(user_order)
         end
 
         return user_order_list
@@ -33,7 +31,7 @@ class OrderService
             total_order_list.push(JSON.parse(total_order_hash.to_json))
         end
         
-        total_order_list.to_json
+        return total_order_list.to_json
     end
 
     def calculate_user_drink_price(drink, size, prices_list)       

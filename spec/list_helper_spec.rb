@@ -6,21 +6,5 @@ describe 'loading lists' do
 
     expect(ListHelper.load('prices')).to eq price.to_json
   end
-
-  describe 'list helper' do
-    it 'should return a list of users orders' do
-      orders = [
-        { "user": "coach", "drink": "long black", "size": "medium" },
-        { "user": "ellis", "drink": "long black", "size": "small" },
-        { "user": "rochelle", "drink": "flat white", "size": "large" },
-        { "user": "coach", "drink": "flat white", "size": "large" },
-        { "user": "zoey", "drink": "long black", "size": "medium" },
-        { "user": "zoey", "drink": "short espresso", "size": "small" }
-      ]
-      users = ["coach", "ellis", "rochelle", "zoey"]
-
-      expect(ListHelper.get_users_total_orders(orders.to_json)).to eq users
-    end
-  end
 end
 

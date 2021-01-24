@@ -6,7 +6,7 @@ class PaymentService
     end
 
     def get_user_payment(orders_list, payment_list)
-        user_list = ListHelper.get_users_total_orders(orders_list)
+        user_list = JSON.parse(orders_list).map { |order| order['user']}.uniq
 
         payment_user_list = []
         user_list.each do |user|    
@@ -36,9 +36,10 @@ class PaymentService
             payment_total_hash['payment_total'] = payment_total
             payment_total_list.push(JSON.parse(payment_total_hash.to_json))
         end
-        payment_total_list.to_json
+        
+        return payment_total_list.to_json
     end
 
-    def calculate_user_balance()
+    def calculate_user_balance(order_total, payment_total)
     end
 end
