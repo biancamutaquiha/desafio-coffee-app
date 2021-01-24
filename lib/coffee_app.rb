@@ -1,11 +1,21 @@
+require 'json'
+require 'order_service'
+require 'price_service'
+require 'payment_service'
+
 class CoffeeApp
     def self.call(prices_json, orders_json, payments_json)
-        return [
-          { "user": "coach",    "order_total": 8.00, "payment_total": 2.50, "balance": 5.50 },
-          { "user": "ellis",    "order_total": 3.25, "payment_total": 3.25, "balance": 0.00 },
-          { "user": "rochelle", "order_total": 4.50, "payment_total": 4.50, "balance": 0.00 },
-          { "user": "zoey",     "order_total": 6.53, "payment_total": 0.00, "balance": 6.53 }
-        ].to_json
+      order_list = OrderService.new
+      order_user_list = order_list.get_user_orders(orders_json)
+
+      users = order_list.get_total_orders(order_user_list, prices_json)
+
+      payment_list = PaymentService.new
+      payments = payment_list.calculate_user_payment(users, payments_json)
+
+      result = payment_list.calculate_user_balance(users, payments)
+
+      return result.to_json
     end
     
 end

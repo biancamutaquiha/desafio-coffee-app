@@ -41,5 +41,19 @@ class PaymentService
     end
 
     def calculate_user_balance(order_total, payment_total)
+        balance = []
+        JSON.parse(order_total).each do |order| 
+            JSON.parse(payment_total).each do |payment| 
+                if order['user'] == payment['user']
+                    balance.push(order.merge(payment))
+                end
+            end
+        end
+
+        balance.each do |balance|
+            balance['balance'] = balance['order_total'] - balance['payment_total']
+        end
+
+        return JSON.parse(balance.to_json)
     end
 end
