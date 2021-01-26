@@ -46,10 +46,10 @@ describe 'payment service' do
   ]
 
   @balance = [
-    { "user": "coach",    "order_total": 8.00, "payment_total": 2.50, "balance": 5.50 },
-    { "user": "ellis",    "order_total": 3.25, "payment_total": 3.25, "balance": 0.00 },
-    { "user": "rochelle", "order_total": 4.50, "payment_total": 4.50, "balance": 0.00 },
-    { "user": "zoey",     "order_total": 6.53, "payment_total": 0.00, "balance": 6.53 }
+    { "user": "coach", "balance": 5.50 },
+    { "user": "ellis", "balance": 0.00 },
+    { "user": "rochelle", "balance": 0.00 },
+    { "user": "zoey", "balance": 6.53 }
   ]
   end
 
@@ -58,6 +58,6 @@ describe 'payment service' do
   end
 
   it 'should calculate what each user now owes' do
-    expect(@payment_service.calculate_user_balance(@total_order.to_json, @payments.to_json)).to eq JSON.parse(@balance.to_json)
+    expect(@payment_service.calculate_user_balance(@total_order.to_json, @payments.to_json)).to eq @balance.to_json
   end 
 end

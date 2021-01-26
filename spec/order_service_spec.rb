@@ -24,13 +24,6 @@ describe 'order service' do
         { "user": "zoey", "drink": "short espresso", "size": "small" }
       ]
 
-      @user_order = [
-        [{"user"=>"coach", "drink"=>"long black", "size"=>"medium"}, {"user"=>"coach", "drink"=>"flat white", "size"=>"large"}], 
-        [{"user"=>"ellis", "drink"=>"long black", "size"=>"small"}], 
-        [{"user"=>"rochelle", "drink"=>"flat white", "size"=>"large"}], 
-        [{"user"=>"zoey", "drink"=>"long black", "size"=>"medium"}, {"user"=>"zoey", "drink"=>"short espresso", "size"=>"small"}]
-      ]
-
       @prices = [
         { "drink_name": "short espresso", "prices": { "small": 3.03 } },
         { "drink_name": "latte", "prices": { "small": 3.50, "medium": 4.00, "large": 4.50 } },
@@ -48,15 +41,7 @@ describe 'order service' do
       ]
     end
 
-    it 'should return a list of orders by user' do
-      expect(@order_service.get_user_orders(@orders.to_json)).to eq @user_order
-    end
-
     it 'should calcute total order by user' do
-      expect(@order_service.get_total_orders(@user_order, @prices.to_json)).to eq @total_order.to_json
-    end
-
-    it 'should calculate drinks prices' do  
-      expect(@order_service.calculate_user_drink_price('latte', 'medium', @prices.to_json)).to eq 4.00
+      expect(@order_service.get_total_orders(@orders.to_json, @prices.to_json)).to eq @total_order.to_json
     end
 end
