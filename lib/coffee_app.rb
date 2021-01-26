@@ -6,16 +6,15 @@ require 'payment_service'
 class CoffeeApp
     def self.call(prices_json, orders_json, payments_json)
       order_list = OrderService.new
-      order_user_list = order_list.get_user_orders(orders_json)
-
-      users = order_list.get_total_orders(order_user_list, prices_json)
+      total_orders = order_list.get_total_orders(orders_json, prices_json)
 
       payment_list = PaymentService.new
-      payments = payment_list.calculate_user_payment(users, payments_json)
+      total_payments = payment_list.calculate_user_payment(total_orders, payments_json)
 
-      result = payment_list.calculate_user_balance(users, payments)
+      balance = payment_list.calculate_user_balance(total_orders, total_payments)
 
-      return result.to_json
-    end
-    
+      result = ListHelper.merge_lists(total_orders, total_payments, balance)
+
+      return result
+    end  
 end
