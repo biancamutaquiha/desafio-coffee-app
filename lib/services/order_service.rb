@@ -1,10 +1,25 @@
 require 'list_helper'
+require 'models/order'
+require 'json'
 
 class OrderService
-    def get_orders_list
+    def get_orders_json
        ListHelper.load('orders')
     end 
 
+    def get_orders_list(orders_json, drink_list)
+        order_list = []
+        JSON.parse(orders_json).each do |order| 
+            drink_list.each do |drink|
+              if (order['drink']) == drink.name
+                order_list.push(Order.new(order['user'], drink))
+              end 
+            end
+        end
+        order_list
+    end
+    
+    
     def get_total_orders(orders_list, price_list)
         user_order_list = get_user_orders(orders_list, price_list)
 
@@ -37,7 +52,6 @@ class OrderService
         return user_order_list
     end
 
-    private
     def calculate_user_drink_price(drink, size, prices_list)       
         JSON.parse(prices_list).each do |price|    
             if price['drink_name'] == drink

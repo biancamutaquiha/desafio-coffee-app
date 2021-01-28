@@ -1,4 +1,4 @@
-require 'price_service'
+require 'services/price_service'
 
 describe 'loading lists' do
   it 'should return price_json from data' do
@@ -6,6 +6,6 @@ describe 'loading lists' do
   
     price_service = PriceService.new
 
-    expect(price_service.get_prices_list).to eq prices.to_json
+    expect(price_service.get_prices_json).to eq prices.to_json
   end
 end

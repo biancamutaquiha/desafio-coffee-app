@@ -1,10 +1,27 @@
-require 'json'
-require 'order_service'
-require 'price_service'
-require 'payment_service'
+require 'jsonable'
+require 'services/order_service'
+require 'services/price_service'
+require 'services/payment_service'
+require 'models/user'
+require 'models/order'
+require 'models/drink'
+require 'models/price'
+require 'models/payment'
 
 class CoffeeApp
     def self.call(prices_json, orders_json, payments_json)
+      price_service = PriceService.new
+      drinks = price_service.get_prices_list(prices_json)
+      
+      order_service = OrderService.new
+      orders = order_service.get_orders_list(orders_json, drinks)
+
+      payment_service = PaymentService.new
+      payments = payment_service.get_payments_list(orders, payments_json)
+
+
+      #####################################################################
+       
       order_list = OrderService.new
       total_orders = order_list.get_total_orders(orders_json, prices_json)
 
