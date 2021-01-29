@@ -5,7 +5,8 @@ class User
         @name = name
     end
 
-    def set_total_order
+    def set_total_order(total_order_hash)
+        @total_order = total_order_hash[@name]
     end
 
     def set_total_payment
