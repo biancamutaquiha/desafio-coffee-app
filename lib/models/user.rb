@@ -1,10 +1,16 @@
 class User
-    attr_reader :name
+    attr_reader :name, :total_order, :total_payment, :balance
 
     def initialize(name)
         @name = name
     end
 
-    def calculate_user_total_order(user, order_list)
+    def set_total_order
+    end
+
+    def set_total_payment
+    end
+
+    def set_balance
     end
 end

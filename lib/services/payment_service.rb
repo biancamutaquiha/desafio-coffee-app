@@ -8,16 +8,14 @@ class PaymentService
        ListHelper.load('payments') #Chamadas para a fonte de dados sendo responsabilidade de repository
     end
 
-    def get_payments_list(orders_list, payments_json)
+    def get_payments_list(payments_json)
         payments_list = []
         JSON.parse(payments_json).each do |payment|
-        orders_list.each do |order|
-          if order.user.name == payment['user']
-            payments_list.push(Payment.new(order.user, payment['amount']))
+            payments_list.push(Payment.new(payment['user'], payment['amount']))
           end
-        end
+        
         return payments_list
-      end
+      
     end
 
     def calculate_user_payment(orders_list, payment_list)

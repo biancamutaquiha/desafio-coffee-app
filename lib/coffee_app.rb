@@ -12,12 +12,15 @@ class CoffeeApp
     def self.call(prices_json, orders_json, payments_json)
       price_service = PriceService.new
       drinks = price_service.get_prices_list(prices_json)
-      
+      print drinks[0].name
+
       order_service = OrderService.new
       orders = order_service.get_orders_list(orders_json, drinks)
+      
 
       payment_service = PaymentService.new
-      payments = payment_service.get_payments_list(orders, payments_json)
+      payments = payment_service.get_payments_list(payments_json)
+      print payments
 
 
       #####################################################################

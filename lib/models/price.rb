@@ -1,8 +1,7 @@
 class Price
-    attr_accessor :size, :value
+    attr_accessor :prices
 
-    def initialize(size, value)
-        @size = size
-        @value = value
+    def initialize(prices)
+        @prices = prices
     end
 end

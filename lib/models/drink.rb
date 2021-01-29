@@ -5,6 +5,6 @@ class Drink
 
     def initialize(price_list)
         @name = price_list['drink_name']
-        @price = Price.new(price_list['prices'], price_list['size'])
+        @price = Price.new(price_list['prices'])
     end
 end
