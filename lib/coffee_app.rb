@@ -34,18 +34,8 @@ class CoffeeApp
       users_list.each {|user| 
         user.set_total_order(total_orders_list)
         user.set_total_payment(total_payments)
-
-       puts user.name
-        puts user.total_payment
-       puts user.total_order 
+        user.set_balance
       }
-
-      
-
-#####################################################################
-      balance = payment_list.calculate_user_balance(total_orders, total_payments)
-
-      result = ListHelper.merge_lists(total_orders, total_payments, balance)
 
       return result
     end  

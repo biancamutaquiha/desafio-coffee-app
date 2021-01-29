@@ -20,5 +20,6 @@ class User
     end
 
     def set_balance
+        @balance = @total_order - @total_payment
     end
 end
