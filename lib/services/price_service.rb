@@ -2,9 +2,6 @@ require 'list_helper'
 require 'models/price'
 
 class PriceService
-    def get_prices_json
-       ListHelper.load('prices')
-    end
 
     def get_prices_list(prices_json)
         drink_list = []

@@ -3,10 +3,7 @@ require 'models/order'
 require 'json'
 
 class OrderService
-    def get_orders_json
-       ListHelper.load('orders')
-    end 
-
+    
     def get_orders_list(orders_json, drink_list)
         order_list = []
         JSON.parse(orders_json).each do |order| 
@@ -18,7 +15,11 @@ class OrderService
         end
         order_list
     end
-    
+
+    def calculate_total_orders(orders_list)
+    end
+
+    ###########################################################################3
     
     def get_total_orders(orders_list, price_list)
         user_order_list = get_user_orders(orders_list, price_list)
