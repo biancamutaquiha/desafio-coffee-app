@@ -1,0 +1,1 @@
+require 'serialize/price_serialize'

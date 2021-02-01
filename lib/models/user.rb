@@ -1,25 +1,27 @@
 class User
-    attr_reader :name, :total_order, :total_payment, :balance
+  attr_reader :name, :order_list, :payment_list
 
-    def initialize(name)
-        @name = name
-    end
+  def initialize(name)
+    @name = name
+  end
 
-    def set_total_order(total_order_hash)
-        @total_order = 0
-        if total_order_hash.include?(@name)
-            @total_order = total_order_hash[@name]
-        end
+  def set_user_order_list(user, orders_list)
+    user_order_list = []
+    orders_list.each do |order| 
+      if user.name == order.user_name
+        user_order_list.push(order)
+      end
     end
+    @order_list = user_order_list
+  end
 
-    def set_total_payment(total_payment_hash)
-        @total_payment = 0
-        if total_payment_hash.include?(@name)
-            @total_payment = total_payment_hash[@name]
-        end
+  def set_user_payment_list(user, payment_list)
+    user_payment_list = []
+    payment_list.each do |payment| 
+      if user.name == payment.user_name
+        user_payment_list.push(payment)
+      end
     end
-
-    def set_balance
-        @balance = @total_order - @total_payment
-    end
+    @payment_list = user_payment_list
+  end
 end
