@@ -1,10 +1,9 @@
 require 'models/price'
-
 class Drink
-    attr_accessor :name, :price
+  attr_accessor :name, :price
 
-    def initialize(price_list)
-        @name = price_list['drink_name']
-        @price = Price.new(price_list['prices'])
-    end
+  def initialize(price_list)
+    @name = price_list['drink_name']
+    @price = Price.new(price_list['prices'])
+  end
 end
