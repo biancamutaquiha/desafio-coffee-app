@@ -20,7 +20,7 @@ class UserBilling
 
     if !@user.order_list.nil?
       @user.order_list.each do |order|         
-        total += order.drink.price.prices[order.size]
+        total += order.product.price.prices[order.size]
       end
     end
 

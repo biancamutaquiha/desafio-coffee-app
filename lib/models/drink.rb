@@ -1,6 +1,7 @@
 require 'models/price'
-class Drink
-  attr_accessor :name, :price
+require 'models/product'
+class Drink < Product
+  attr_reader :name, :price
 
   def initialize(price_list)
     @name = price_list['drink_name']
