@@ -18,8 +18,10 @@ class UserBilling
   def calculate_total_order()
     total = 0
 
-    @user.order_list.each do |order|         
-      total += order.drink.price.prices[order.size]
+    if !@user.order_list.nil?
+      @user.order_list.each do |order|         
+        total += order.drink.price.prices[order.size]
+      end
     end
 
     @total_order = total.round(2)
@@ -28,9 +30,11 @@ class UserBilling
   def calculate_total_payment
     total = 0
 
-    @user.payment_list.each {|order| total += order.amount}
+    if !@user.payment_list.nil?
+      @user.payment_list.each {|order| total += order.amount}
+    end
 
-    @total_payment = total
+    @total_payment = total.round(2)
   end    
 
   def calculate_balance

@@ -19,8 +19,8 @@ class CoffeeApp
     payments = payment.get_payments_list(payments_json)
     
     users_list.each {|user|
-      user.set_user_order_list(user, orders)
-      user.set_user_payment_list(user, payments)
+      user.set_user_order_list(orders)
+      user.set_user_payment_list(payments)
     }
 
     result = []
