@@ -9,9 +9,7 @@ class User
     user_order_list = []
 
     orders_list.each do |order| 
-      if @name == order.user_name
-        user_order_list.push(order)
-      end
+      user_order_list.push(order) if @name == order.user_name
     end
     
     @order_list = user_order_list
@@ -21,9 +19,7 @@ class User
     user_payment_list = []
 
     payment_list.each do |payment| 
-      if @name == payment.user_name
-        user_payment_list.push(payment)
-      end
+      user_payment_list.push(payment) if @name == payment.user_name
     end
 
     @payment_list = user_payment_list

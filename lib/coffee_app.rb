@@ -29,6 +29,6 @@ class CoffeeApp
       result.push(user_billing.get_user_result())
     }         
 
-    return result.to_json
+    result.to_json
   end  
 end
