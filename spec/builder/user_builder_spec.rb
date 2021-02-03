@@ -1,7 +1,7 @@
-require 'serialize/user_serialize'
+require 'builder/user_builder'
 
-describe 'user deserialize' do
-  it '' do
+describe 'user builder' do
+  it 'should return a user list' do
     order_json = [
       { "user": "coach", "drink": "long black", "size": "medium" },
       { "user": "ellis", "drink": "long black", "size": "small" },
@@ -10,8 +10,8 @@ describe 'user deserialize' do
       { "user": "zoey", "drink": "short espresso", "size": "small" }
     ]
 
-    user_serialize = UserSerialize.new
-    users = user_serialize.get_users(order_json.to_json)
+    user_builder = UserBuilder.new
+    users = user_builder.get_users(order_json.to_json)
 
     expect(users.size).to eq 3
     expect(users[0].name).to eq 'coach'

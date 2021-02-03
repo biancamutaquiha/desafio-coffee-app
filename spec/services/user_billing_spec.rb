@@ -2,8 +2,8 @@ require 'services/user_billing'
 
 describe 'user billing' do
   before(:each) do
-    @order_1 = Order.new('coach', Drink.new({ "drink_name"=> "long black", "prices"=> { "small"=> 3.25, "medium"=> 3.50 }}), 'medium')
-    @order_2 = Order.new('coach', Drink.new({ "drink_name"=> "flat white", "prices"=> { "small"=> 3.50, "medium"=> 4.00, "large"=> 4.50 }}), 'large')
+    @order_1 = Order.new('coach', Drink.new('long black', { "small"=> 3.25, "medium"=> 3.50}), 'medium')
+    @order_2 = Order.new('coach', Drink.new('flat white', { "small"=> 3.50, "medium"=> 4.00, "large"=> 4.50 }), 'large')
 
     @payment_1 = Payment.new("coach", 2.50)
 

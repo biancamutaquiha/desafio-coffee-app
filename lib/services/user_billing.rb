@@ -19,7 +19,7 @@ class UserBilling
     total = 0
 
     if !@user.order_list.nil?
-      @user.order_list.each {|order| total += order.product.price.prices[order.size]}
+      @user.order_list.each {|order| total += order.product.price_list[order.size]}
     end
 
     @total_order = total.round(2)

@@ -2,8 +2,8 @@ require 'models/user'
 
 describe 'user' do
   it 'should set order list by user' do
-    order_1 = Order.new('coach', Drink.new({ "drink_name"=> "long black", "prices"=> { "small"=> 3.25, "medium"=> 3.50 }}), 'medium')
-    order_2 = Order.new('coach', Drink.new({ "drink_name"=> "flat white", "prices"=> { "small"=> 3.50, "medium"=> 4.00, "large"=> 4.50 }}), 'large')
+    order_1 = Order.new('coach', Drink.new('long black', { "small"=> 3.25, "medium"=> 3.50 }), 'medium')
+    order_2 = Order.new('coach', Drink.new('flat white', { "small"=> 3.50, "medium"=> 4.00, "large"=> 4.50 }), 'large')
 
     user = User.new('coach')
     user.set_user_order_list([order_1, order_2])

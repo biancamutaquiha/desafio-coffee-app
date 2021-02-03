@@ -1,5 +1,5 @@
 require 'models/order'
-class OrderSerialize   
+class OrderBuilder  
   def get_orders_list(orders_json, product_list)
     order_list = []
 

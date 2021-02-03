@@ -1,5 +1,5 @@
 require 'models/payment'
-class PaymentSerialize  
+class PaymentBuilder 
   def get_payments_list(payments_json)
     payments_list = []
 

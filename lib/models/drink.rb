@@ -1,10 +1,9 @@
-require 'models/price'
 require 'models/product'
 class Drink < Product
-  attr_reader :name, :price
+  attr_reader :name, :price_list
 
-  def initialize(price_list)
-    @name = price_list['drink_name']
-    @price = Price.new(price_list['prices'])
+  def initialize(name, price_list)
+    @name = name
+    @price_list = price_list
   end
 end

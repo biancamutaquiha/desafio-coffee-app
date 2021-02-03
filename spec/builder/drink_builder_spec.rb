@@ -1,6 +1,6 @@
-require 'serialize/price_serialize'
+require 'builder/drink_builder'
 
-describe 'price serialize' do
+describe 'drikn builder' do
   it 'should return deserialized price object' do
     prices_json = [
         { "drink_name": "long black", "prices": { "small": 3.25, "medium": 3.50 } },
@@ -8,8 +8,8 @@ describe 'price serialize' do
         { "drink_name": "short espresso", "prices": { "small": 3.03 } }
     ]
 
-      price = PriceSerialize.new
-      drinks = price.get_prices_list(prices_json.to_json)
+      drink_builder = DrinkBuilder.new
+      drinks = drink_builder.get_drink_list(prices_json.to_json)
       expect(drinks[0].name).to eq ('long black')
       expect(drinks[1].name).to eq ('flat white')
       expect(drinks[2].name).to eq ('short espresso')
