@@ -1,7 +1,7 @@
 require 'builder/drink_builder'
 
 describe 'drikn builder' do
-  it 'should return deserialized price object' do
+  it 'should return a list price' do
     prices_json = [
         { "drink_name": "long black", "prices": { "small": 3.25, "medium": 3.50 } },
         { "drink_name": "flat white", "prices": { "small": 3.50, "medium": 4.00, "large": 4.50 } },
