@@ -16,6 +16,8 @@ class OrderBuilder
     order_list
   end
 
+  private
+
   def is_complete_order(order)
     !order['user'].nil? and !order['size'].nil?
   end
