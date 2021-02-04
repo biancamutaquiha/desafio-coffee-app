@@ -3,6 +3,8 @@ class User
 
   def initialize(name, order_list = [], payment_list = [])
     @name = name
+    @order_list = order_list
+    @payment_list = payment_list
   end
 
   def set_user_order_list(orders_list)

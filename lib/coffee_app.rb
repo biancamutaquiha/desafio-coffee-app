@@ -8,14 +8,9 @@ class CoffeeApp
   def self.call(prices_json, orders_json, payments_json)
     drink_list =  build_drink_list(prices_json)
     order_list = build_order_list(orders_json, drink_list)
-    user_list = build_user_list(orders_json)
-    
     payment_list = build_payment_list(payments_json)
     
-    user_list.each {|user|
-      user.set_user_order_list(order_list)
-      user.set_user_payment_list(payment_list)
-    }
+    user_list = build_user_list(order_list, payment_list)
 
     result = []
     user_list.each {|user|
@@ -38,9 +33,9 @@ class CoffeeApp
     order_builder.get_orders_list(orders_json, drink_list)
   end
 
-  def self.build_user_list(orders_json)
+  def self.build_user_list(orders_list, payment_list)
     user_builder = UserBuilder.new
-    user_builder.get_users(orders_json)
+    user_builder.get_users(orders_list, payment_list)
   end
 
   def self.build_payment_list(payments_json)
