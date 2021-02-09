@@ -24,22 +24,18 @@ class CoffeeApp
   private
 
   def self.build_drink_list(prices_json)
-    drink_builder = DrinkBuilder.new
-    drink_builder.get_drink_list(prices_json)
+    DrinkBuilder.new.get_drink_list(prices_json)
   end
 
   def self.build_order_list(orders_json, drink_list)
-    order_builder = OrderBuilder.new
-    order_builder.get_orders_list(orders_json, drink_list)
+    OrderBuilder.new.get_orders_list(orders_json, drink_list)
   end
 
   def self.build_user_list(orders_list, payment_list)
-    user_builder = UserBuilder.new
-    user_builder.get_users(orders_list, payment_list)
+    UserBuilder.new.get_users(orders_list, payment_list)
   end
 
   def self.build_payment_list(payments_json)
-    payment_builder = PaymentBuilder.new
-    payment_builder.get_payments_list(payments_json)
+    PaymentBuilder.new.get_payments_list(payments_json)
   end
 end
