@@ -13,7 +13,7 @@ describe 'user builder' do
     payment_1 = Payment.new("coach", 2.50)
 
     user_builder = UserBuilder.new
-    users = user_builder.get_users([order_1, order_2, order_3, order_4, order_5], [payment_1])
+    users = user_builder.build_user_list([order_1, order_2, order_3, order_4, order_5], [payment_1])
 
     expect(users.size).to eq 3
     expect(users[0].name).to eq 'coach'
@@ -26,7 +26,7 @@ describe 'user builder' do
     payment_1 = Payment.new("coach", 2.50)
 
     user_builder = UserBuilder.new
-    users = user_builder.get_users(order_json, [payment_1])
+    users = user_builder.build_user_list(order_json, [payment_1])
 
     expect(users.size).to eq 0
   end

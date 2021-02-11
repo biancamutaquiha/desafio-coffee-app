@@ -1,10 +1,10 @@
 require 'models/user'
 
 class UserBuilder
-  def get_users(orders_list, payment_list)
+  def build_user_list(orders_list, payment_list)
     users = get_all_users(orders_list)
   
-    user_list = build_users(users, orders_list, payment_list)
+    user_list = build_user(users, orders_list, payment_list)
 
     user_list
   end
@@ -19,7 +19,7 @@ class UserBuilder
     users
   end
 
-  def build_users(users, orders_list, payment_list)
+  def build_user(users, orders_list, payment_list)
     user_list = []
     users.each  do |user| 
       user_list.push(User.new(user))     

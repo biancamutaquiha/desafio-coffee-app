@@ -13,7 +13,7 @@ describe 'order builder' do
     drink_2 = Drink.new('flat white', { "small"=> 3.50, "medium"=> 4.00, "large"=> 4.50 })
 
     order_builder = OrderBuilder.new 
-    orders = order_builder.get_orders_list(orders_json.to_json, [drink_1, drink_2])
+    orders = order_builder.build_order_list(orders_json.to_json, [drink_1, drink_2])
 
     expect(orders.size).to eq 3
     expect(orders[0].user_name).to eq 'coach'
@@ -36,7 +36,7 @@ describe 'order builder' do
     drink_2 = Drink.new('flat white', { "small"=> 3.50, "medium"=> 4.00, "large"=> 4.50 })
 
     order_builder = OrderBuilder.new 
-    orders = order_builder.get_orders_list(orders_json.to_json, [drink_1, drink_2])
+    orders = order_builder.build_order_list(orders_json.to_json, [drink_1, drink_2])
 
     expect(orders.size).to eq 1
     expect(orders[0].user_name).to eq 'ellis'
@@ -49,7 +49,7 @@ describe 'order builder' do
     drink_2 = Drink.new('flat white', { "small"=> 3.50, "medium"=> 4.00, "large"=> 4.50 })
 
     order_builder = OrderBuilder.new 
-    orders = order_builder.get_orders_list(orders_json.to_json, [drink_1, drink_2])
+    orders = order_builder.build_order_list(orders_json.to_json, [drink_1, drink_2])
 
     expect(orders.size).to eq 0
   end

@@ -1,4 +1,4 @@
-require 'services/user_billing'
+require 'models/user_billing'
 
 describe 'user billing' do
   before(:each) do

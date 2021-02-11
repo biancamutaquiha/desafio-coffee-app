@@ -10,7 +10,7 @@ describe 'drikn builder' do
     ]
 
     drink_builder = DrinkBuilder.new
-    drinks = drink_builder.get_drink_list(prices_json.to_json)
+    drinks = drink_builder.build_drink_list(prices_json.to_json)
     expect(drinks.size).to eq 3
     expect(drinks[0].name).to eq ('long black')
     expect(drinks[1].name).to eq ('flat white')
@@ -25,7 +25,7 @@ describe 'drikn builder' do
     ]
 
     drink_builder = DrinkBuilder.new
-    drinks = drink_builder.get_drink_list(prices_json.to_json)
+    drinks = drink_builder.build_drink_list(prices_json.to_json)
     expect(drinks.size).to eq 1
     expect(drinks[0].name).to eq ('short espresso')
   end
@@ -34,7 +34,7 @@ describe 'drikn builder' do
     prices_json = []
 
     drink_builder = DrinkBuilder.new
-    drinks = drink_builder.get_drink_list(prices_json.to_json)
+    drinks = drink_builder.build_drink_list(prices_json.to_json)
     expect(drinks.size).to eq 0
   end
 end

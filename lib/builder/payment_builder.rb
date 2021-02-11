@@ -1,6 +1,6 @@
 require 'models/payment'
 class PaymentBuilder 
-  def get_payments_list(payments_json)
+  def build_payment_list(payments_json)
     payments_list = []
 
     JSON.parse(payments_json).each do |payment|

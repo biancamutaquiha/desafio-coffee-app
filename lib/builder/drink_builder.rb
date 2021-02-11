@@ -1,7 +1,7 @@
 require 'models/drink'
 
 class DrinkBuilder
-  def get_drink_list(prices_json)
+  def build_drink_list(prices_json)
     drink_list = []
 
     JSON.parse(prices_json).each do |price|

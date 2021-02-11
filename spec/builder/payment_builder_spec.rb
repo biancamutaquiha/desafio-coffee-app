@@ -11,7 +11,7 @@ describe 'payment builder' do
     ]
 
     payment_builder = PaymentBuilder.new
-    payment_list = payment_builder.get_payments_list(payment_json.to_json)
+    payment_list = payment_builder.build_payment_list(payment_json.to_json)
 
     expect(payment_list.size).to eq 4
     expect(payment_list[0].user_name).to eq 'coach'
@@ -29,7 +29,7 @@ describe 'payment builder' do
     ]
 
     payment_builder = PaymentBuilder.new
-    payment_list = payment_builder.get_payments_list(payment_json.to_json)
+    payment_list = payment_builder.build_payment_list(payment_json.to_json)
 
     expect(payment_list.size).to eq 2
     expect(payment_list[0].user_name).to eq 'rochelle'
@@ -40,7 +40,7 @@ describe 'payment builder' do
     payment_json = []
 
     payment_builder = PaymentBuilder.new
-    payment_list = payment_builder.get_payments_list(payment_json.to_json)
+    payment_list = payment_builder.build_payment_list(payment_json.to_json)
 
     expect(payment_list.size).to eq 0
   end

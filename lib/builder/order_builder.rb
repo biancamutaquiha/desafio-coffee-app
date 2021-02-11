@@ -1,6 +1,6 @@
 require 'models/order'
 class OrderBuilder  
-  def get_orders_list(orders_json, product_list)
+  def build_order_list(orders_json, product_list)
     order_list = []
 
     JSON.parse(orders_json).each do |order| 
